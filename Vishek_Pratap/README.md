@@ -15,4 +15,4 @@ Twitter:- [@0xvph](https://www.twitter.com/0xvph)
 
 [Linkedin](https://www.linkedin.com/in/vishekpratap)
 
-To view this rendered blog post, click here: [Build your first Addon](https://htmlpreview.github.io/?https://github.com/edge-addons-dev-community/Blog.post/blob/main/Vishek_Pratap/Build%20Your%20First%20Addon%20by%20Vishek.html)
+To view this rendered blog post, click here: [Build your first Addon](https://htmlpreview.github.io/?https://github.com/edge-addons-dev-community/blog-post-challenge/blob/main/Vishek_Pratap/Build%20Your%20First%20Addon%20by%20Vishek.html)
