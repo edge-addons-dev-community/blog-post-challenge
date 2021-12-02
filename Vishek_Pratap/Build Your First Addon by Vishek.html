@@ -1,0 +1,181 @@
+<!-- wp:paragraph {"style":{"typography":{"fontSize":"30px"}}} -->
+<p style="font-size:30px"><strong><sup><span style="text-decoration:underline;">What are
+                Extensions?</span></sup></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>👉It's a program or a few lines of code that will change your experience while you work on your favorite browsers
+    whether it is Microsoft Edge, Google Chrome, or Mozilla Firefox. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>👉 It really helps you to modify some functions of your browser so that you feel amazing while you are working on the
+    browser. For Example- <em>Grammarly</em> (Not Sponsored😂)</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"fontSize":"25px"}}} -->
+<p style="font-size:25px"><strong><span style="text-decoration:underline;">Why do we need an Extension?</span></strong>
+</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>I am not going to say this you all should use extensions but I would like to say that everyone must try extensions as
+    it is really helpful most of the time as we all know how Grammarly has changed many lives. It's nothing but like the
+    cherry on the top of the cake or we can say it is like a discount for us when we use our browser. Why I am saying
+    Grammarly or extensions are life savings because now I am going to share the roadmap of Grammarly.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":209,"width":828,"height":403,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large is-resized"><img
+        src="https://thevphacker.files.wordpress.com/2021/11/grammarly.png?w=1024" alt="" class="wp-image-209"
+        width="828" height="403" />
+    <figcaption><em>Source- Google Images</em></figcaption>
+</figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>📌<strong><span style="text-decoration:underline;"> Step-by-Step Guide:- How to Build your first
+            Extension?</span></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>An extension is made up of a few files and before starting make one folder with any name so in my case I have used
+    <strong><mark style="background-color:rgba(0,0,0,0);" class="has-inline-color has-vivid-red-color">"Hello
+            0xvph"</mark></strong>. So we are going to make a basic extension so like "Hello world" I came up with
+    "Hello 0xvph". </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Then we need 3 most important files which are-</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":210,"width":834,"height":432,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large is-resized"><img
+        src="https://thevphacker.files.wordpress.com/2021/11/hello-0xvph.png?w=1024" alt="" class="wp-image-210"
+        width="834" height="432" />
+    <figcaption>hello 0xvph (Folder)</figcaption>
+</figure>
+<!-- /wp:image -->
+
+<!-- wp:list -->
+<ul>
+    <li><strong><em>manifest.json</em></strong>- it is very important because it is a heart of our extension so whatever
+        we want to tell extension this file will help you. So, basically it takes all our instructions and gives us a
+        output.</li>
+    <li><strong><em>popup.html-</em></strong> This is important because after giving the instructions we wanted to see
+        our output so this file shows what extension loads.</li>
+    <li><strong><em>icon.png-</em></strong> This file can be anything like according to you as I will definitely going
+        to use my image here because it's our first extension and atleast we should have some satisfaction like we did
+        something cool🤩😍</li>
+</ul>
+<!-- /wp:list -->
+
+<!-- wp:image {"align":"center","id":212,"sizeSlug":"large","linkDestination":"none"} -->
+<div class="wp-block-image">
+    <figure class="aligncenter size-large"><img src="https://thevphacker.files.wordpress.com/2021/11/manifest.png?w=697"
+            alt="" class="wp-image-212" />
+        <figcaption>manifest.json</figcaption>
+    </figure>
+</div>
+<!-- /wp:image -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">{
+   "manifest_version": 2,
+
+   "name": "Hello 0xvph!",
+   "version": "0.1",
+   "description": "My first extension.",
+   "browser_action": {
+       "default_icon": "icon.png",
+       "default_popup": "popup.html"
+   },
+&nbsp;   "permissions": [
+       "activeTab"
+    ]
+}</pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p>Now, Let me explain to you what is the function of each field:-</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul>
+    <li><code><strong>manifest_version</strong></code>&nbsp;is required by Google’s extension framework. It must be set
+        to&nbsp;<code>2</code>&nbsp;to indicate the current manifest framework.</li>
+    <li><code><strong>browser action</strong></code>&nbsp;identifies the type of extension you’re building. A browser
+        action extension places a clickable icon in Chrome’s menu bar, allowing the user to interact with your extension
+        and run its contents.</li>
+    <li><code><strong>default_icon</strong></code>&nbsp;shows the path to the icon. It starts from the extensions
+        directory.</li>
+    <li><code><strong>default_popup</strong></code>&nbsp;shows the path to the file that will run when the extension is
+        clicked. It will be shown beneath the extension in a popup box.</li>
+    <li><code><strong>permissions</strong></code>&nbsp;tells the extension where it’s allowed to
+        operate.&nbsp;<code><strong>activeTab</strong></code>&nbsp;is the most common, allowing the extension to access
+        information about the front-most tab.</li>
+</ul>
+<!-- /wp:list -->
+
+<!-- wp:image {"align":"center","id":214,"sizeSlug":"large","linkDestination":"none"} -->
+<div class="wp-block-image">
+    <figure class="aligncenter size-large"><img src="https://thevphacker.files.wordpress.com/2021/11/popup.png?w=636"
+            alt="" class="wp-image-214" />
+        <figcaption>popup.html</figcaption>
+    </figure>
+</div>
+<!-- /wp:image -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">&lt;!doctype html&gt;
+&lt;html&gt;
+   &lt;head&gt;
+        &lt;title&gt;Hello 0xvph&lt;/title&gt;
+   &lt;/head&gt;
+   &lt;style type="text/css"&gt;
+       body {
+           margin: 10px;
+       }
+       h1 {
+           font-size: 15px;
+           text-align: center;
+       }
+   &lt;/style&gt;
+   &lt;body&gt;
+       &lt;h1&gt;Hello 0xvph!&lt;/h1&gt;
+   &lt;/body&gt;
+&lt;/html&gt;</pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:heading -->
+<h2 id="load-your-extension">Load Your Extension</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Once you’ve finished writing your extension, you can load it into Chrome.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Navigate
+    to&nbsp;<code><strong><mark style="background-color:rgba(0,0,0,0);" class="has-inline-color has-black-color">chrome://extensions</mark></strong></code>&nbsp;and
+    turn on Developer Mode by ticking the checkbox in the upper right.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Then click the <em><strong>“Load unpacked extension…”</strong></em> button and select the extension’s directory.
+    Chrome will run a basic debug on your&nbsp;<code><strong>manifest.json</strong></code>&nbsp;file to make sure it’s
+    up to snuff. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"align":"center","id":213,"sizeSlug":"large","linkDestination":"none"} -->
+<div class="wp-block-image">
+    <figure class="aligncenter size-large"><img src="https://thevphacker.files.wordpress.com/2021/11/ext.png?w=413"
+            alt="" class="wp-image-213" />
+        <figcaption>My Extension</figcaption>
+    </figure>
+</div>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>Once the extension is loaded, you’ll see its icon in the menu bar. Now we’re getting places!</p>
+<!-- /wp:paragraph -->
