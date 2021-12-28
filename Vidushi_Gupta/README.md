@@ -164,12 +164,12 @@ We add basic styling to the popup’s user interface. You can customize the CSS 
 - Enable the **Developer Mode**
 - Click on **Load unpacked** and select your directory (Font detection add_on). Make sure that the `manifest.json` is in the root of the directory. 
 
-![loading extension]()
+![loading extension](Assets/loading%20extension.png)
 
 - **Reload** your extension after you make any changes to the code and you’re good to go. 
 - From the extension panel on the toolbar, select your add-on and *hover* on the webpage to see the font-family.
 
-![working of extension]()
+![working of extension](Assets/addon%20working.png)
 
 Voila! And now you have made your first ever utility edge add-on. Go ahead and enhance this extension further by extracting other CSS features of this webpage!
 
