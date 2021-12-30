@@ -1,5 +1,5 @@
 # Make your first utility Edge Add-on
-While surfing sites we usually like the colour palette or the font family of a webpage. What if I tell you that now you can make your own edge add-on to detect the web page design elements to design and develop your next website/app? You can make this beginner friendly extension in just **7 simple** steps. 
+Have you ever surfed a website and were blown away by it's color palette and design? What if I tell you that now you can make your own edge add-on to detect the web page design elements to design and develop your next website/app? You can make this beginner friendly extension in just **7 simple** steps. 
 
 ## What is an Edge Add-on? 
 > A Microsoft Edge extension is a small program that developers use to add or modify features of Microsoft Edge. An extension improves a user's browsing experience. It usually provides a niche function that is important to a target audience. 
@@ -12,7 +12,7 @@ You can refer to the official documentation in the [Microsoft Edge Development d
 
 We would be building an add-on that detects the font-family that is used on a part of the webpage. In the very same way, you can also detect the font size, line height, font colour and other web design parameters. 
 
-**Step 1:** Create a new directory which contains the add-on. Let’s name it `Font detection add_on`
+**Step 1:** Create a new directory which will contain the add-on. Let’s name it `Font detection add_on`
 
 **Step 2:** Create a file with the name of [`manifest.json`](https://docs.microsoft.com/en-us/microsoft-edge/extensions-chromium/getting-started/part1-simple-extension).
 The manifest JSON file contains basic platform information like the version of the extension, the permissions, title, icon, etc. This is the blueprint of the add-on. 
