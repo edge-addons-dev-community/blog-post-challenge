@@ -17,26 +17,23 @@ We would be building an add-on that detects the font-family that is used on a pa
 **Step 2:** Create a file with the name of [`manifest.json`](https://docs.microsoft.com/en-us/microsoft-edge/extensions-chromium/getting-started/part1-simple-extension).
 The manifest JSON file contains basic platform information like the version of the extension, the permissions, title, icon, etc. This is the blueprint of the add-on. 
 ```json
-{
-  "manifest_version": 2,
-  "name": "Font family detection",
-  "version": "1",
-  "description": "Helps detect font family",
-  "content_scripts": [
+{ 
+    "manifest_version":2, 
+    "name":"Font detection", 
+    "version":"1.0", 
+    "description":"Detect the fonts used in a webpage", 
+    "content_scripts":[ 
     {
-      "matches": ["<all_urls>"],
-      "css":["popup.css"],
-      "js": ["content.js"]
-    }
-  ],
-  "browser_action": {
-    "default_icon": "icon.png",
-    "default_popup": "popup_font.html"
-  },
-  "permissions": [
-    "activeTab"
-  ]
-
+        "matches":["<all_urls>"], 
+        "css":["popup.css"], 
+        "js":["content.js"] 
+    } 
+     ], 
+        "browser_action":{ 
+        "default_icon":"icon.png", 
+        "default_popup":"popup.html" 
+     }, 
+        "permissions":["activeTab"] 
 }
 ```
 We start off by specifying the `Manifest version` as `2` as the manifest version 1 is depreciated and we use the version 2 currently. Next, we mention the name of our add-on which is “Font-family detection” in our case. With this we specify the version of this extension. We chose version 1 and then we could further move on to version 1.1, 1.2, 2.1, etc. as we progress with newer features. A description of the add-on is provided next. The `content_scripts` tells the add-on where to access the stylesheets (css) and the js files for functionality. Along with this it also specifies the urls that this function should work on – which in our case is `<all_urls>`. The `browser_action` directs the add-on to the default icon and the default html to be rendered on the browser. In the end, we give the extension permissions – which in our case is the `activeTab`. 
@@ -46,115 +43,204 @@ We start off by specifying the `Manifest version` as `2` as the manifest version
 **Step 3:** Creating a default html file – `popup.html`
 
 ```html
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Font family detection</title>
-    <link rel="stylesheet" href="popup.css">
-  </head>
-  <body>
-    <a href="main_popup.html"></a>
-    <button type="button" class="font" id="Family">Font Family</button>
-  <script type="text/javascript" src="popup.js"></script>
-  </body>
-</html>
+<!DOCTYPE html> 
+
+<html lang="en"> 
+
+<head> 
+
+    <meta charset="UTF-8"> 
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+    <title>Font Family detection</title> 
+
+    <link rel="stylesheet" href="popup.css"> 
+
+</head> 
+
+<body> 
+
+    <button type="button" class="font" id="Family">Font Family</button> 
+
+<script type="text/javascript" src="popup.js"></script> 
+
+</body> 
+
+</html> 
 ```
 In this file we mention the user interface of the extension. In our case we add a button with the name “Font Family” on it. With this we link in the javascript file `popup.js` that tells the function of the add-on. 
 
 **Step 4:** Create the `popup.js` file that mentions the function to be executed by the add-on.
 
 ```js
-(function user_choice(){
-  let buttons = document.querySelectorAll('.font')
-  buttons.forEach(item => {item.addEventListener('click', activate);});
+(function user_choice(){ 
 
-  function activate(event){
-    let buttons = document.querySelectorAll('.font')
-    let chosenId = event.target.attributes.id.nodeValue;
-    buttons.forEach(item => {item.classList.remove('active');})
-    document.getElementById(chosenId).classList.add('active');
+    let buttons = document.querySelectorAll('.font') 
 
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
-      chrome.tabs.sendMessage(tabs[0].id, {userChoice: chosenId});
-    })
-  }
-})();
+    buttons.forEach(item => {item.addEventListener('click', activate);}); 
+
+   
+
+    function activate(event){ 
+
+      let buttons = document.querySelectorAll('.font') 
+
+      let chosenId = event.target.attributes.id.nodeValue; 
+
+      buttons.forEach(item => {item.classList.remove('active');}) 
+
+      document.getElementById(chosenId).classList.add('active'); 
+
+   
+
+      chrome.tabs.query({active: true, currentWindow: true}, function(tabs){ 
+
+        chrome.tabs.sendMessage(tabs[0].id, {userChoice: chosenId}); 
+
+      }) 
+
+    } 
+
+  })();
 ```
 We mention the `user_choice` to be executed on the current window (which is the active tab) in the above function. The code in `popup.js` sends a message to your content script that we create and inject into your browser tab.
 
 **Step 5:** Create a `content.js` file which is the content script for your add-on.
 
 ```js
-function init(){
-  createDisplayBox();
-  browserListeners();
-}
+function init(){ 
 
-function createDisplayBox(){
-  let display_box = document.createElement("div");
-  display_box.setAttribute("id", "extension");
-  display_box.setAttribute("style",
-  `position: absolute;
-  background-color: #faea00;
-  color: #000000;
-  padding: 10px 15px 10px 15px;
-  border-radius: 5px;
-  font-ramily: Times New Roman;
-  font-size: 15px;
-  width: auto`);
-  document.body.appendChild(display_box);
-}
+    createDisplayBox(); 
 
-function browserListeners(){
-  onmousemove = function(event){
-    var box = document.getElementById("extension");
-    box.style.left = event.pageX + "px";
-    box.style.top = event.pageY + "px";
-  }
-  chrome.runtime.onMessage.addListener(function(message){
-    var choice = message.userChoice;
-    if (choice === "Family"){
-      onmouseover = function(event){changeText("extension", getCssValue(event, "fontFamily"));}
-   }
-  })
-}
+    browserListeners(); 
 
-function getCssValue(event, input){
-  let elementOver = event.target;
-  let text = elementOver.textContent
-  let cssObj = window.getComputedStyle(elementOver);
-  if(text){return cssObj[input];}
-  else{return null}
-}
+  } 
 
-function changeText(id, value){
-  document.getElementById(String(id)).textContent = value;
-}
+   
 
-init();
+  function createDisplayBox(){ 
+
+    let display_box = document.createElement("div"); 
+
+    display_box.setAttribute("id", "extension"); 
+
+    display_box.setAttribute("style", 
+
+    `position: absolute; 
+
+    background-color: #faea00; 
+
+    color: #000000; 
+
+    padding: 10px 15px 10px 15px; 
+
+    border-radius: 5px; 
+
+    font-ramily: Times New Roman; 
+
+    font-size: 15px; 
+
+    width: auto`); 
+
+    document.body.appendChild(display_box); 
+
+  } 
+
+   
+
+  function browserListeners(){ 
+
+    onmousemove = function(event){ 
+
+      var box = document.getElementById("extension"); 
+
+      box.style.left = event.pageX + "px"; 
+
+      box.style.top = event.pageY + "px"; 
+
+    } 
+
+    chrome.runtime.onMessage.addListener(function(message){ 
+
+      var choice = message.userChoice; 
+
+      if (choice === "Family"){ 
+
+        onmouseover = function(event){changeText("extension", getCssValue(event, "fontFamily"));} 
+
+     } 
+
+    }) 
+
+  } 
+
+   
+
+  function getCssValue(event, input){ 
+
+    let elementOver = event.target; 
+
+    let text = elementOver.textContent 
+
+    let cssObj = window.getComputedStyle(elementOver); 
+
+    if(text){return cssObj[input];} 
+
+    else{return null} 
+
+  } 
+
+   
+
+  function changeText(id, value){ 
+
+    document.getElementById(String(id)).textContent = value; 
+
+  } 
+
+   
+
+  init(); 
 ```
 In the above code, the function `createDisplayBox` gives the style and user interface of the box that displays the font-family of the letters under/near the cursor. The next functions, look for the `fontFamily` in the css and output it in the display box. 
 
 **Step 6:** Create `popup.css` for the styling of the user interface of `popup.html`
 
 ```css
-button {
-  background-color: #faea00;
-  color: #000000;
-  font-size: 15px;
-  width: 160px;
-  height: 35px;
-  margin: 5px;
-  font-family: "Times New Roman";
-  border-radius: 5px;
-}
-.active {
-  background-color: #8ce427;
-}
-body {
-  background-color: #0f111b;
-}
+button { 
+
+  background-color: yellow; 
+
+  color: black; 
+
+  font-size: 15px; 
+
+  width: 150px; 
+
+  height: 50px; 
+
+  margin: 5px; 
+
+  font-family: "Times New Roman", Times, serif; 
+
+  border-radius: 10px; 
+
+} 
+
+.active { 
+
+  background-color: green; 
+
+} 
+
+body { 
+
+  background-color: gray; 
+
+} 
 ```
 We add basic styling to the popup’s user interface. You can customize the CSS as per your choice. 
 
